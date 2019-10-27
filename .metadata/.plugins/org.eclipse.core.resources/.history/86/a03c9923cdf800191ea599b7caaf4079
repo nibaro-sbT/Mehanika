@@ -1,0 +1,103 @@
+package forces;
+
+import start.Main;
+
+public class Force {
+	double startx;
+	double starty;
+	
+	// in m/s^2
+	double intezitet;
+	float angleH;
+
+	double momentumX = 0;
+	double momentumY = 0;
+	
+	double x;
+	double y;
+	public Force(double startx, double starty, double inezitet, float angleH) {
+		super();
+		this.startx = startx;
+		this.starty = starty;
+		this.intezitet = inezitet;
+		this.angleH = angleH;
+		
+		this.x = (double) (startx + intezitet * Math.cos(angleH));
+		this.y = (double) (starty - intezitet * Math.sin(angleH));
+		
+		
+	}
+	
+	
+	
+	public Force(double startx, double starty, double x, double y) {
+		super();
+		this.startx = startx;
+		this.starty = starty;
+		this.x = startx + x;
+		this.y = starty - y;
+		
+		this.intezitet = Math.sqrt((double)((x-startx)*(x-startx) + (y-starty)*(y-starty)));
+		
+		this.angleH = (float)Math.acos(Math.abs((double)(y-starty)/intezitet));
+	}
+	
+	public void uppdateMomentum() {
+		momentumX+=(intezitet*Math.cos(angleH)/Main.GAME_SPEED);
+		momentumY+=(intezitet*Math.sin(angleH)/Main.GAME_SPEED);	
+	}
+
+	public double getStartx() {
+		return startx;
+	}
+
+	public void setStartx(double startx) {
+		this.startx = startx;
+	}
+
+	public double getStarty() {
+		return starty;
+	}
+
+	public void setStarty(double starty) {
+		this.starty = starty;
+	}
+
+	public double getdoubleezitet() {
+		return intezitet;
+	}
+
+	public void setdoubleezitet(double doubleezitet) {
+		this.intezitet = doubleezitet;
+	}
+
+	public float getAngleH() {
+		return angleH;
+	}
+
+	public void setAngleH(float angleH) {
+		this.angleH = angleH;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+
+
+
+
+	
+}

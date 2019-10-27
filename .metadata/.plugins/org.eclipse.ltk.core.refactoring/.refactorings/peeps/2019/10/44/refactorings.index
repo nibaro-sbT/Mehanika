@@ -7,3 +7,7 @@
 1572156366717	Delete element
 1572156410536	Delete element
 1572157484261	Rename compilation unit 'Sqare.java'
+1572168860601	Rename type 'force'
+1572189088381	Encapsulate field 'centarMase'
+1572189597321	Encapsulate field 'body'
+1572189804249	Encapsulate field 'masoCentricnaSila'

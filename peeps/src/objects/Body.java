@@ -1,5 +1,6 @@
 package objects;
 
+import java.awt.Point;
 import java.awt.Polygon;
 
 public class Body {
@@ -11,6 +12,8 @@ public class Body {
 	private int mass = 0;
 	
 	private Polygon poly;
+	
+	private Point centarMase;
 
 	public Polygon getPoly() {
 		return poly;
@@ -35,6 +38,14 @@ public class Body {
 
 	public void setMass(int mass) {
 		this.mass = mass;
+	}
+
+	public Point getCentarMase() {
+		return centarMase;
+	}
+
+	public void setCentarMase(Point centarMase) {
+		this.centarMase = centarMase;
 	}
 
 }

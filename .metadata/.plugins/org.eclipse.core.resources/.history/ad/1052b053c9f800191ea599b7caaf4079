@@ -1,0 +1,87 @@
+package forces;
+
+public class Force {
+	int startx;
+	int starty;
+	
+	// in meters/second
+	double intezitet;
+	double angleH;
+	
+	int x;
+	int y;
+	public Force(int startx, int starty, double inezitet, double angleH) {
+		super();
+		this.startx = startx;
+		this.starty = starty;
+		this.intezitet = inezitet;
+		this.angleH = angleH;
+		
+		this.x = (int) (startx + intezitet * Math.cos(angleH));
+		this.y = (int) (starty - intezitet * Math.sin(angleH));
+		
+		
+	}
+	
+	public Force(int startx, int starty, int x, int y) {
+		super();
+		this.startx = startx;
+		this.starty = starty;
+		this.x = startx + x;
+		this.y = starty - y;
+		
+		this.intezitet = (int)Math.sqrt((double)((x-startx)*(x-startx) + (y-starty)*(y-starty)));
+		
+		this.angleH = Math.acos(Math.abs((double)(y-starty)/intezitet));
+	}
+
+	public int getStartx() {
+		return startx;
+	}
+
+	public void setStartx(int startx) {
+		this.startx = startx;
+	}
+
+	public int getStarty() {
+		return starty;
+	}
+
+	public void setStarty(int starty) {
+		this.starty = starty;
+	}
+
+	public int getIntezitet() {
+		return intezitet;
+	}
+
+	public void setIntezitet(int intezitet) {
+		this.intezitet = intezitet;
+	}
+
+	public double getAngleH() {
+		return angleH;
+	}
+
+	public void setAngleH(double angleH) {
+		this.angleH = angleH;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	
+}

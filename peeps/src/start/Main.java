@@ -5,30 +5,43 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
+import java.awt.Polygon;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 
+import forces.Force;
+import forces.Gravity;
 import objects.Body;
 import objects.geometry.Rect;
 
 public class Main extends JFrame {
 
 	Vector<Body> tela = new Vector<Body>();
+	Vector<Force> sile = new Vector<Force>();
+	
+	AffineTransform tx = new AffineTransform();
 	int width = 600;
 	int height = 600;
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	
-	private final int GAME_SPEED = 50;
+	public static final int GAME_SPEED = 25;
+	public static final int PHISICS_SIMULATION_TIME_SLOWDOWN_FACTOR = 5;
 	private static final long serialVersionUID = 1L;
 
+	Force g;
+	
 	Main() {
-		setTitle("nigga");
+		setTitle("Статика");
 
 		/////////////////////////////////////
-		tela.add(new Rect(true, 0, 200, 200, 100, 60, Math.PI / 6));
+		tela.add(new Rect(true, 0, 200, 200, 100, 100, Math.PI));
+		
+		g = new Gravity(tela.get(0).getCentarMase().x, tela.get(0).getCentarMase().y, tela.get(0));
+		sile.add(g);
 		//////////////////////////////////////
 		
 		setResizable(false);
@@ -55,15 +68,19 @@ public class Main extends JFrame {
 			long currentTime = System.currentTimeMillis();
 			if (timeran != currentTime && currentTime % (1000 / GAME_SPEED) == 1) {
 				counter++;
-				((Rect) tela.get(0)).setAngleH(counter * Math.PI / 200);
+				//((Rect) tela.get(0)).setAngleH(counter * Math.PI / 100);
 				tela.get(0).setPoly(((Rect) tela.get(0)).generatePolygon());
+				
+				for(int i = 0; i < sile.size(); i++) {
+					sile.get(i).uppdateMomentum();
+				}
 				
 				
 				
 				timeran = currentTime;
 			}
 			// render
-			if (timeran2 != currentTime && currentTime % (1000 / 60) == 15) {
+			if (timeran2 != currentTime && currentTime % (1000 / 30) == 15) {
 				render();
 				timeran = currentTime;
 			}
@@ -83,12 +100,42 @@ public class Main extends JFrame {
 		
 		
 //////////here u draw n shit
+		
+		
+		
 		g2.setColor(Color.black);
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		g2.setColor(Color.green);
+		
 		for (int i = 0; i < tela.size(); i++) {
-			g2.fillPolygon(tela.get(i).getPoly());
+			g2.drawPolygon(tela.get(i).getPoly());
+			
 		}
+		g2.setColor(Color.red);
+		
+		for(int i = 0; i < sile.size(); i++) {
+			g2.drawLine((int)sile.get(i).getStartx(),(int) sile.get(i).getStarty(),(int) sile.get(i).getDrawableX(),(int)sile.get(i).getDrawableY());
+			
+			////////////////////
+			Polygon arrowHead = new Polygon();  
+			arrowHead.addPoint( 0, ((int)(sile.get(i).getIntezitet()/1.5)));
+			arrowHead.addPoint( -((int)(sile.get(i).getIntezitet()/1.5)), -((int)(sile.get(i).getIntezitet()/1.5)));
+			arrowHead.addPoint( ((int)(sile.get(i).getIntezitet()/1.5)),-((int)(sile.get(i).getIntezitet()/1.5)));
+
+			///////////////////
+			
+		    tx.setToIdentity();
+		    double angle = Math.atan2((int)sile.get(i).getDrawableY()-(int) sile.get(i).getStarty(), (int) sile.get(i).getDrawableX()-(int)sile.get(i).getStartx());
+		    tx.translate((int) sile.get(i).getDrawableX(), (int)sile.get(i).getDrawableY());
+		    tx.rotate((angle-Math.PI/2d));  
+		    
+		    
+			
+		    g2.setTransform(tx);   
+		    g2.fill(arrowHead);
+			
+			}
+		
 /////////
 
 		g2.dispose();

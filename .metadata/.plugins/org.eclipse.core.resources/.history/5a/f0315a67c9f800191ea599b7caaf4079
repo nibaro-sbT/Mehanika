@@ -1,0 +1,10 @@
+package forces;
+
+public class Gravity extends Force{
+
+	public Gravity(int startx, int starty, int inezitet, double angleH) {
+		super(startx, starty, 9.81, -90);
+		// TODO Auto-generated constructor stub
+	}
+
+}

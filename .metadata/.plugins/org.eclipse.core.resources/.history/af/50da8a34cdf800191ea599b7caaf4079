@@ -1,0 +1,10 @@
+package forces;
+
+public class Gravity extends Force{
+
+	public Gravity(double startx, double starty,Body body) {
+		super(startx, starty, 9.81, -90,body);
+		
+	}
+
+}
