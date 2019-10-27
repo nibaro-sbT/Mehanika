@@ -1,0 +1,15 @@
+package objects.geometry;
+
+import objects.Body;
+
+public class Sqare extends Body{
+	
+	
+	
+	public Sqare(boolean homogeno,int mass) {
+		super.setHomogeno(homogeno);
+		super.setMass(mass);
+		
+	}
+	
+}

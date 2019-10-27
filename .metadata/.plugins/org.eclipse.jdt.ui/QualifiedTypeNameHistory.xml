@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.awt.GraphicsDevice"/>
+    <fullyQualifiedTypeName name="java.awt.GraphicsEnvironment"/>
+    <fullyQualifiedTypeName name="java.awt.DisplayMode"/>
+    <fullyQualifiedTypeName name="java.awt.image.BufferStrategy"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="com.sun.tools.javac.util.List"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.awt.List"/>
+    <fullyQualifiedTypeName name="cityObjects.Bloc"/>
+</qualifiedTypeNameHistroy>

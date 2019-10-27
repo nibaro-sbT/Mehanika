@@ -1,0 +1,5 @@
+package objects.geometry;
+
+public class Sqare {
+
+}

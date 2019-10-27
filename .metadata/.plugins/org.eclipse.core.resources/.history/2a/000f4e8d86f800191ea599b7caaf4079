@@ -1,0 +1,74 @@
+package start;
+
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+
+import objects.Body;
+import objects.geometry.Rect;
+
+public class Main extends JFrame {
+
+	
+	Vector <Body> tela = new Vector<Body>();
+
+	private final int GAME_SPEED = 20;
+	private static final long serialVersionUID = 1L;
+
+	
+	
+	Main() {
+		setTitle("nigga");
+
+		/////////////////////////////////////
+		tela.add(new Rect(true, 0, 200, 200, 60, 90, 3));
+		//////////////////////////////////////
+    
+		
+		setSize(200, 200);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+
+	public static void main(String[] args) {
+		System.out.println("sup world");
+		Main m = new Main();
+		m.setVisible(true);
+		m.run();
+	}
+
+	private void run() {
+		long timeran = 0;
+		while (true) {
+			long currentTime = System.currentTimeMillis();
+			if (currentTime % (1000 / GAME_SPEED) == 1 && timeran != currentTime) {
+				render();
+				// repaint();
+				// System.out.println(currentTime);
+				timeran = currentTime;
+			}
+		}
+	}
+
+	public void render() {
+		BufferStrategy bs = getBufferStrategy();
+		if (bs == null) {
+			createBufferStrategy(3);
+			return;
+		}
+		Graphics g = bs.getDrawGraphics();
+//////////here u draw n shit
+		for(int i = 0;i < tela.size();i++) {
+			g.drawPolygon(tela.get(i).getPoly());
+		}
+/////////
+		g.dispose();
+		bs.show();
+	}
+
+	@Override
+	public void paint(Graphics g) {
+	}
+
+}

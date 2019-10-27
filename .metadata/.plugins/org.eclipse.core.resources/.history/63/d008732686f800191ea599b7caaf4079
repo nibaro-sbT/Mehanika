@@ -1,0 +1,27 @@
+package objects;
+
+public class Body {
+	
+	//all bodies are homogen at start
+	private boolean homogeno = true;
+	
+	//all bodies start light
+	private int mass = 0;
+
+	public boolean isHomogeno() {
+		return homogeno;
+	}
+
+	public void setHomogeno(boolean homogeno) {
+		this.homogeno = homogeno;
+	}
+	
+	public int isMasst() {
+		return mass;
+	}
+
+	public void setMass(int mass) {
+		this.mass = mass;
+	}
+
+}

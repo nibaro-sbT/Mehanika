@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+    <libraryInfo home="/usr/lib/jvm/java-13-openjdk" version="13"/>
+    <libraryInfo home="/usr/lib/jvm/java-12-openjdk" version="12.0.2"/>
+</libraryInfos>

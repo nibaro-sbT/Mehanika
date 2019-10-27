@@ -1,0 +1,83 @@
+package start;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferStrategy;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+
+import objects.Body;
+import objects.geometry.Rect;
+
+public class Main extends JFrame {
+
+	Vector<Body> tela = new Vector<Body>();
+
+	private final int GAME_SPEED = 30;
+	private static final long serialVersionUID = 1L;
+
+	Main() {
+		setTitle("nigga");
+
+		/////////////////////////////////////
+		tela.add(new Rect(true, 0, 200, 200, 100, 60, Math.PI / 6));
+		//////////////////////////////////////
+
+		setSize(200, 200);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+
+	public static void main(String[] args) {
+		System.out.println("sup world");
+		Main m = new Main();
+		m.setVisible(true);
+		m.run();
+	}
+
+	private void run() {
+		long timeran = 0;
+		long timeran2 = 0;
+
+		long counter = 0;
+		while (true) {
+			/// fizics tick
+			long currentTime = System.currentTimeMillis();
+			if (timeran != currentTime && currentTime % (1000 / GAME_SPEED) == 1) {
+				counter++;
+				((Rect) tela.get(0)).setAngleH(counter * Math.PI / 200);
+				tela.get(0).setPoly(((Rect) tela.get(0)).generatePolygon());
+				timeran = currentTime;
+			}
+			// render
+			if (timeran2 != currentTime && currentTime % (1000 / 30) == 15) {
+				render();
+				timeran = currentTime;
+			}
+		}
+	}
+
+	public void render() {
+		BufferStrategy bs = getBufferStrategy();
+		if (bs == null) {
+			createBufferStrategy(3);
+			return;
+		}
+		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
+//////////here u draw n shit
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(Color.green);
+		for (int i = 0; i < tela.size(); i++) {
+			g.drawPolygon(tela.get(i).getPoly());
+		}
+/////////
+		g.dispose();
+		bs.show();
+	}
+
+	@Override
+	public void paint(Graphics g) {
+	}
+
+}

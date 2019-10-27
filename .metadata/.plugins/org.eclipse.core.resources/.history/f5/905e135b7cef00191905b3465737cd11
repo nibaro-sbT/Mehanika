@@ -1,0 +1,71 @@
+package start;
+
+import java.awt.Color;
+import java.awt.DisplayMode;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JFrame;
+
+public class Main extends JFrame{
+
+
+	
+	private final int GAME_SPEED = 20;
+	private static final long serialVersionUID = 1L;
+
+	Main(){
+		setTitle("nigga");
+
+		
+		setSize(200,200);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+
+
+	
+	public static void main(String[] args) {
+		System.out.println("sup world");
+		Main m = new Main();
+		m.setVisible(true);
+		m.run();
+	}
+	
+	private void run() {
+		long timeran = 0;
+		while(true){
+			long currentTime = System.currentTimeMillis();
+			if(currentTime % (1000/GAME_SPEED) == 1 && timeran!=currentTime) {
+				render();
+				//repaint();
+				//System.out.println(currentTime);
+				timeran = currentTime;
+			}
+		}
+	}
+
+	public void render(){
+		BufferStrategy bs = getBufferStrategy();
+		if(bs==null) {
+			createBufferStrategy(3);
+			return;
+		}
+		Graphics g = bs.getDrawGraphics();
+		g.setColor(Color.black);
+		g.fillRect(50, 50, 50, 50);
+		g.dispose();
+		bs.show();
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D)g;
+
+	}
+	
+	
+}

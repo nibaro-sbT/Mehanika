@@ -1,0 +1,50 @@
+package cityObjects;
+
+import java.awt.Color;
+
+public class Bloc {
+	public final static int MIN_TILE=5;
+	public final static int MAX_TILE_LVL=6;
+	
+	private int tilelvl;
+	private Color tileCololr;
+	private int position;
+	
+
+	public Bloc(int tilelvl, Color tileCololr, int position) {
+		super();
+		this.tilelvl = tilelvl;
+		this.tileCololr = tileCololr;
+		this.position = position;
+	}
+
+	public Bloc(int tilelvl, Color tileCololr) {
+		super();
+		this.tilelvl = tilelvl;
+		this.tileCololr = tileCololr;
+	}
+	
+	public int getTilelvl() {
+		return tilelvl;
+	}
+	public void setTilelvl(int tilelvl) {
+		this.tilelvl = tilelvl;
+	}
+	public Color getTileCololr() {
+		return tileCololr;
+	}
+	public void setTileCololr(Color tileCololr) {
+		this.tileCololr = tileCololr;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
+	
+	
+}
