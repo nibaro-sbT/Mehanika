@@ -161,8 +161,8 @@ public class Force {
 		return angleH;
 	}
 
-	public void setAngleH(float angleH) {
-		this.angleH = angleH;
+	public void setAngleH(double d) {
+		this.angleH = d;
 	}
 
 	public double getX() {

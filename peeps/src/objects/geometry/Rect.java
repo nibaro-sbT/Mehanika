@@ -2,11 +2,13 @@ package objects.geometry;
 
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.geom.Line2D;
 
 import objects.Body;
 
 public class Rect extends Body{
+	
+	//lowest point
+	private int lowestPoint = 0;
 	
 	private int x;
 	private int y;
@@ -17,13 +19,28 @@ public class Rect extends Body{
 	//vertikalna
 	private int b;
 	
+	//njndjnjnjnj
+	double cosAlfa;
+	double sinAlfa ;
+	double cosBeta;
+	double sinBeta;
+	double dijagonalaPola;
+	
 	//ugao horizontalne stranice i horizontale
 	private double angleH;
 	
 		public Rect(boolean homogeno,int mass,int x, int y,int a,int b,double angleH) {
 		super.setHomogeno(homogeno);
 		super.setMass(mass);
-		super.setCentarMase(new Point(x + (int)((a/Math.sqrt((a*a+b*b)))*Math.sqrt((a*a+b*b))/2), y - (int)((b/Math.sqrt((a*a+b*b)))*Math.sqrt((a*a+b*b))/2)));
+		
+		cosAlfa = Math.cos(angleH);
+		sinAlfa = Math.sin(angleH);
+		cosBeta = a/Math.sqrt((a*a+b*b));
+		sinBeta = b/Math.sqrt((a*a+b*b));
+		dijagonalaPola = Math.sqrt((a*a+b*b))/2;
+		
+		super.setCentarMase(new Point( x +  (int) (((cosAlfa * cosBeta + sinAlfa * sinBeta) * dijagonalaPola)),
+				y - (int) (((sinAlfa * cosBeta - cosAlfa * sinBeta) * dijagonalaPola))));
 		this.x = x;
 		this.y = y;
 		this.a = a;
@@ -32,22 +49,42 @@ public class Rect extends Body{
 		
 		super.setPoly(generatePolygon());
 	}
-	
-	public Polygon generatePolygon() {
-		uppdatePositionBasedOnCentreOfMass();		
 		
-		int[]xx= {x,(int) (x + a * Math.cos(angleH)),(int) (x + (a * Math.cos(angleH))+ (int)(b * Math.sin(angleH))),x + (int) (b * Math.sin(angleH))};
-		int[]yy= {y,(int) (y - a * Math.sin(angleH)),(int) (y - (a * Math.sin(angleH))+ (int)(b * Math.cos(angleH))), y + (int) (b * Math.cos(angleH))};
+
+		
+	public Polygon generatePolygon() {
+		uppdatePositionBasedOnCentreOfMass();	
+		
+		int []xx= {x,(int) (x + a * Math.cos(angleH)),(int) (x + (a * Math.cos(angleH))+ (int)(b * Math.sin(angleH))),x + (int) (b * Math.sin(angleH))};
+		int []yy= {y,(int) (y - a * Math.sin(angleH)),(int) (y - (a * Math.sin(angleH))+ (int)(b * Math.cos(angleH))), y + (int) (b * Math.cos(angleH))};
+		
+		lowestPoint = lovestPoint(yy);
+		
 		int numberOfPoints = 4;
 		
 		return new Polygon(xx,yy,numberOfPoints);
 	}
 	
 	private void uppdatePositionBasedOnCentreOfMass() {
-		x = getCentarMase().x + (int)((a/Math.sqrt((a*a+b*b)))*Math.sqrt((a*a+b*b))/2);
-		y = getCentarMase().y + (int)((b/Math.sqrt((a*a+b*b)))*Math.sqrt((a*a+b*b))/2);
+		
+		cosAlfa = Math.cos(angleH);
+		sinAlfa = Math.sin(angleH);
+		
+		x = getCentarMase().x - (int) (((cosAlfa * cosBeta + sinAlfa * sinBeta) * dijagonalaPola));
+		y = getCentarMase().y + (int)(((sinAlfa * cosBeta - cosAlfa * sinBeta) * dijagonalaPola));
+
 	}
 	
+
+
+	@Override
+	public int lovestPoint(int[] y) {
+		// TODO Auto-generated method stub
+		return super.lovestPoint(y);
+	}
+
+
+
 	public int getA() {
 		return a;
 	}
@@ -99,6 +136,18 @@ public class Rect extends Body{
 
 	public void setAngleH(double angleH) {
 		this.angleH = angleH;
+	}
+
+
+
+	public int getLowestPoint() {
+		return lowestPoint;
+	}
+
+
+
+	public void setLowestPoint(int lowestPoint) {
+		this.lowestPoint = lowestPoint;
 	}
 	
 }

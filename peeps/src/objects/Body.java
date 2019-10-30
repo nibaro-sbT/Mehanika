@@ -47,5 +47,18 @@ public class Body {
 	public void setCentarMase(Point centarMase) {
 		this.centarMase = centarMase;
 	}
+	
+	public int lovestPoint(int[] y) {
+		//lowest point known to man
+		int urmom = y[0];
+		
+		for(int i = 0; i<y.length;i++) {
+			if(urmom<y[i]) {
+				urmom = y[0];
+			}
+		}
+		
+		return urmom;
+	}
 
 }
